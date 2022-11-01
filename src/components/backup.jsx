@@ -5,7 +5,7 @@ import {
   useTable,
   useGlobalFilter,
   usePagination,
-  useSortBy, useResizeColumns ,useBlockLayout
+  useSortBy,
 } from "react-table";
 import GlobalSearch from "./GlobalSearch";
 // import withDragableColumns from 'rea'
@@ -16,8 +16,6 @@ export default function Table({ data }) {
   const navigate = useNavigate();
 
   const [api, setapi] = useState(null);
-  console.log("api",api)
-
   const onDelete = (id) => {
     console.log("delete", id);
     axios
@@ -49,31 +47,26 @@ export default function Table({ data }) {
     navigate("/edit");
   };
 
-  const COLUMNS =[
+  const COLUMNS = [
     {
       Header: "Id",
       accessor: "id",
-      width: 38,
     },
     {
       Header: "Title",
       accessor: "title",
-      width: 194,
     },
     {
       Header: "Price",
       accessor: "price",
-      width: 75,
     },
     {
       Header: "Description",
       accessor: "description",
-      width: 694,
     },
     {
       Header: "Images",
       accessor: "images",
-      width: 150,
       Cell: ({ cell: { value } }) => (
         <div>
           <img src={value} alt={value} width={100} />
@@ -83,7 +76,6 @@ export default function Table({ data }) {
     {
       Header: "Action",
       accessor: "action",
-      width: 149,
       Cell: (cell) => (
         // console.log(cell.row.values.id)
         <div>
@@ -110,7 +102,7 @@ export default function Table({ data }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
+    // page,
     nextPage,
     previousPage,
     canNextPage,
@@ -123,7 +115,6 @@ export default function Table({ data }) {
     prepareRow,
     state,
     setGlobalFilter,
-    resetResizing,
   } = useTable(
     {
       columns,
@@ -131,16 +122,13 @@ export default function Table({ data }) {
     },
     useGlobalFilter,
     useSortBy,
-    usePagination,
-    useBlockLayout,
-    useResizeColumns,
+    usePagination
   );
 
   const { pageIndex, pageSize, globalFilter } = state;
 
   const [theme, setTheme] = useState("light");
   const [dark, setDark] = useState("Dark");
-  console.log("dark",dark)
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
@@ -155,12 +143,7 @@ export default function Table({ data }) {
     document.body.className = theme;
   }, [theme]);
 
-  console.log("dark",toggleTheme)
-
-
   return (
-    <>
-    <button onClick={resetResizing}>Reset Resizing</button>
     <div className={`${theme}`}>
       {/* <button className='btn btn-info mx-2 my-2' onClick={toggleTheme}>{dark}</button> */}
       <h3 className="text-center">React Table</h3>
@@ -177,22 +160,16 @@ export default function Table({ data }) {
           <thead className="main-header">
             {headerGroups.map((headerGroup) => (
               <tr
-                className="bg-dark text-light tr"
+                className="bg-dark text-light"
                 {...headerGroup.getHeaderGroupProps()}
               >
                 {headerGroup.headers.map((column) => (
                   <th
                     scope="col"
-                    className="th"
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render("Header")}
-                    
-                    <span
-                    {...column.getResizerProps()}
-                    className={`resizer ${
-                      column.isResizing ? 'isResizing' : ''
-                    }`}>
+                    <span>
                       {column.isSorted
                         ? column.isSortedDesc
                           ? " ▼"
@@ -209,11 +186,11 @@ export default function Table({ data }) {
               prepareRow(row);
               // console.log('row',row.id)
               return (
-                <tr {...row.getRowProps()} className="tr">
+                <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     // console.log('cell',cell)
                     return (
-                      <td {...cell.getCellProps()} className='table-td'>{cell.render("Cell")}</td>
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                     );
                   })}
                 </tr>
@@ -296,6 +273,5 @@ export default function Table({ data }) {
         </div>
       </div>
     </div>
-    </>
   );
 }

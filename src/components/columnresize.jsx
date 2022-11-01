@@ -5,7 +5,7 @@ import {
   useTable,
   useGlobalFilter,
   usePagination,
-  useSortBy, useResizeColumns ,useBlockLayout
+  useSortBy, useResizeColumns 
 } from "react-table";
 import GlobalSearch from "./GlobalSearch";
 // import withDragableColumns from 'rea'
@@ -16,7 +16,6 @@ export default function Table({ data }) {
   const navigate = useNavigate();
 
   const [api, setapi] = useState(null);
-  console.log("api",api)
 
   const onDelete = (id) => {
     console.log("delete", id);
@@ -49,31 +48,26 @@ export default function Table({ data }) {
     navigate("/edit");
   };
 
-  const COLUMNS =[
+  const COLUMNS = [
     {
       Header: "Id",
       accessor: "id",
-      width: 38,
     },
     {
       Header: "Title",
       accessor: "title",
-      width: 194,
     },
     {
       Header: "Price",
       accessor: "price",
-      width: 75,
     },
     {
       Header: "Description",
       accessor: "description",
-      width: 694,
     },
     {
       Header: "Images",
       accessor: "images",
-      width: 150,
       Cell: ({ cell: { value } }) => (
         <div>
           <img src={value} alt={value} width={100} />
@@ -83,7 +77,6 @@ export default function Table({ data }) {
     {
       Header: "Action",
       accessor: "action",
-      width: 149,
       Cell: (cell) => (
         // console.log(cell.row.values.id)
         <div>
@@ -132,7 +125,6 @@ export default function Table({ data }) {
     useGlobalFilter,
     useSortBy,
     usePagination,
-    useBlockLayout,
     useResizeColumns,
   );
 
@@ -140,7 +132,6 @@ export default function Table({ data }) {
 
   const [theme, setTheme] = useState("light");
   const [dark, setDark] = useState("Dark");
-  console.log("dark",dark)
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
@@ -155,7 +146,17 @@ export default function Table({ data }) {
     document.body.className = theme;
   }, [theme]);
 
-  console.log("dark",toggleTheme)
+
+  function Table({ columns, data }) {
+    const defaultColumn = React.useMemo(
+      () => ({
+        minWidth: 30,
+        width: 150,
+        maxWidth: 400,
+      }),
+      []
+    )}
+
 
 
   return (
@@ -187,12 +188,11 @@ export default function Table({ data }) {
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render("Header")}
-                    
-                    <span
                     {...column.getResizerProps()}
-                    className={`resizer ${
-                      column.isResizing ? 'isResizing' : ''
-                    }`}>
+                      className={`resizer ${
+                        column.isResizing ? 'isResizing' : ''
+                      }`}
+                    <span>
                       {column.isSorted
                         ? column.isSortedDesc
                           ? " ▼"
@@ -213,7 +213,7 @@ export default function Table({ data }) {
                   {row.cells.map((cell) => {
                     // console.log('cell',cell)
                     return (
-                      <td {...cell.getCellProps()} className='table-td'>{cell.render("Cell")}</td>
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                     );
                   })}
                 </tr>

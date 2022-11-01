@@ -5,7 +5,7 @@ table {
 }
 
 table td, table th {
-  border: 1px solid #ddd !important;
+  border: 1px solid #e8d6d6 !important;
   padding: 8px !important;
 }
 
@@ -20,3 +20,110 @@ table th {
   background-color: #04AA6D !important;
   color: white !important;
 }
+
+.main-header{
+  position: sticky;
+    width: 100%;
+    top: 0px;
+    z-index: 1;
+}
+.main-tbody tr td{
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  /* width: 50px;  */
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  border: 1px solid #000000;
+}
+.main-tbody:hover td{
+  overflow: visible;
+  white-space: normal; 
+  /* text-overflow: clip; */
+}
+
+tbody {
+  height: calc(150vh - 210px); 
+  table-layout: fixed;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+thead, tbody tr {
+  display: table;
+  width: 150%;
+  table-layout: fixed;
+}
+table tr{
+  width: 200% !important;
+}
+/* width */
+tbody::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+tbody::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+tbody::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+tbody::-webkit-scrollbar-thumb:hover {
+  background: #6b6868; 
+}
+.tr{
+  display: flex !important;
+    width: 1294px !important;
+}
+.table {
+  display: inline-block;
+  border-spacing: 0;
+  border: 1px solid black;
+}
+.table .tr :last-child .td {
+  border-bottom: 0;
+}
+.table .th, .table .td {
+  margin: 0;
+  padding: 0.5rem;
+  position: relative;
+  /* width: 214px !important; */
+}
+/* .th{
+  display: inline-block !important;
+    box-sizing: border-box !important;
+    width: 200px !important;
+    position: relative !important;
+    cursor: pointer !important;
+} */
+.table .th :last-child, .table .td :last-child {
+  border-right: 0;
+}
+.table .th .resizer, .table .td .resizer {
+  display: inline-block;
+  background: #e8d6d6;
+  width: 3px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(50%);
+  z-index: 1;
+  touch-action: none;
+}
+.table .th .resizer.isResizing, .table .td .resizer.isResizing {
+  background: red;
+}
+/* .table-td{
+  display: inline-block !important;
+  box-sizing: border-box !important;
+  width: 214px !important; 
+} */
+
